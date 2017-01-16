@@ -1,0 +1,3 @@
+﻿  FibonacciNum.cpp
+d:\word\visual studio 2015\projects\fibonaccinumbers\fibonaccinumbers\fibonaccinum.cpp(9): warning C4101: “max_num”: 未引用的局部变量
+  FibonacciNumbers.vcxproj -> d:\word\visual studio 2015\Projects\FibonacciNumbers\Debug\FibonacciNumbers.exe
