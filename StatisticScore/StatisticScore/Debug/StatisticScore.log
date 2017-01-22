@@ -1,0 +1,5 @@
+﻿  Source.cpp
+d:\documents\visual studio 2015\projects\statisticscore\statisticscore\source.cpp(65): warning C4018: '<': signed/unsigned mismatch
+d:\documents\visual studio 2015\projects\statisticscore\statisticscore\source.cpp(77): warning C4018: '<': signed/unsigned mismatch
+  StatisticScore.vcxproj -> d:\documents\visual studio 2015\Projects\StatisticScore\Debug\StatisticScore.exe
+  StatisticScore.vcxproj -> d:\documents\visual studio 2015\Projects\StatisticScore\Debug\StatisticScore.pdb (Full PDB)
