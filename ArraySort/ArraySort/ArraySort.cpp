@@ -22,6 +22,11 @@ int index_of_smallest(const int a[], int start_index, int number_used);
 void bubble_sort(int a[], int length);
 //冒泡排序法
 
+void insert_sort(int a[], int length);
+//插入排序法
+
+
+
 
 int main()
 {
@@ -32,6 +37,7 @@ int main()
 	fill_array(sample_array, MAX_NUMBER_ARRAY, number_used);
 	//selection_sort(sample_array, number_used);
 	bubble_sort(sample_array, number_used);
+	//insert_sort(sample_array, number_used);
 
 	cout << "In sorted order the numbers are:\n";
 	for (int index = 0; index < number_used; index++)
@@ -110,14 +116,30 @@ void bubble_sort(int a[], int length)
 {
 	using namespace std;
 	cout << "****Bubble Sort.****\n";
-	for (int i = length - 1; i >0 ; i--)
+	for (int i = length - 1; i > 0; i--)
 	{
 		for (int j = 0; j < i; j++)
 		{
-			if (a[j+1] < a[j])//若要从大到小，就改成>号
+			if (a[j + 1] < a[j])//若要从大到小，就改成>号
 			{
-				swap_values(a[j+1], a[j]);
+				swap_values(a[j + 1], a[j]);
 			}
-		}		
+		}
+	}
+}
+
+void insert_sort(int a[], int length)
+{
+	using namespace std;
+	cout << "****Insertion Sort.****\n";
+	for (unsigned int i = 1; i < length; i++)
+	{
+		for (unsigned int j = i ; j > 0; j--)
+		{
+			if (a[j] < a[j-1])//若要从大到小，就改成>号
+			{
+				swap_values(a[j], a[j-1]);
+			}
+		}
 	}
 }
