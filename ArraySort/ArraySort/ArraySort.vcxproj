@@ -148,6 +148,9 @@
   <ItemGroup>
     <ClCompile Include="ArraySort.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArraySort.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
