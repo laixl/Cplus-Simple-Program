@@ -73,6 +73,9 @@ void heap_sort(int *a, int length);
 //2、调整成小顶堆（或大顶堆）
 //3、交换堆顶元素与最后一个元素
 
+void heap2_sort(int *a, int length);
+//为了测试最大堆
+
 
 int main()
 {
@@ -85,8 +88,8 @@ int main()
 	//bubble_sort(sample_array, number_used);
 	//insert_sort(sample_array, number_used);
 
-	int sample_array[12] = { 49,38,65,97,76,13,27,49,100,32,4,14 };
-	int number_used = 12;
+	int sample_array[10] = { 100,1,32,4,14,73,6,18,29,70};
+	int number_used = 10;
 	heap_sort(sample_array, number_used);
 
 	cout << "In sorted order the numbers are:\n";
@@ -393,41 +396,93 @@ void shell_sort2(int *a, int length)
 	}
 }
 
+//调整为最小堆
 void Adjust2MinHeap(int *a, int father, int length)
 {
-	int child;//孩子结点的标号
-	int temp;
+	int child;//左孩子结点的标号
+	int temp; //保存当前父结点的值
 
-	//一般用数组来表示堆，若根结点存在序号0处， i结点的父结点下标就为(i - 1) / 2
-	//i结点的左右子结点下标分别为2*i + 1和2*i + 2
+	//一般用数组来表示堆，若根结点存在序号0处， 数组下标为i的结点的父结点下标就为(i - 1) / 2
+	//其左右子结点下标分别为2*i + 1和2*i + 2
 	//（注：如果根结点是从1开始，则左右孩子结点分别是2i和2i + 1）
 	for (temp = a[father]; 2 * father + 1 <= length; father = child)
 	{
-		child = 2 * father + 1;//
-		if ((child < length) && (a[child] > a[child + 1]))
+		child = 2 * father + 1;//左孩子
+		if ((child + 1 < length) && (a[child] > a[child + 1]))//当有右孩子存在且右孩子比左孩子小时，选取右孩子
 			child++;
-		if (a[child] < temp)
+
+		if (a[child] < temp)//当孩子结点的值小于父结点时，将孩子结点赋值给父结点
 			a[father] = a[child];
 		else
-			break;
-	}
+			break;//当父结点的值比孩子结点小时，跳出循环
+	}//此时temp里的值应该是数组的最小数
 	a[father] = temp;
-
 }
-
-void Adjust2MaxHeap(int *a, int pos, int length)
-{
-
-}
-
 void heap_sort(int *a, int length)
 {
 	int i;
-	for (i = length / 2 - 1; i >= 0; i--)
+	//？？？i一开始从length/2开始
+	//因为child=2*i+1，且child<length，得到i<(length-1)/2<length/2，就算i取得大，这样的孩子结点也不存在
+	//这里的2*i<=length.改成i<(length-1)/2也行
+	//循环建立最小堆
+	for (i = length / 2; i >= 0; i--)
 		Adjust2MinHeap(a, i, length - 1);
-	for (i = length - 1; i >= 0; i--)
+
+	//交换对顶和最后一个数之后，再调整堆
+	for (i = length - 1; i > 0; i--)
 	{
 		swap_values(a[0], a[i]);
 		Adjust2MinHeap(a, 0, i - 1);
+	}
+}
+
+void Adjust2MaxHeap(int *a, int father, int length)
+{
+	int child;
+	int temp;
+
+	child = 2 * father + 1;
+	temp = a[father];
+
+	while (child < length)
+	{
+		// 如果有右孩子结点，并且右孩子结点的值大于左孩子结点，则选取右孩子结点
+		if (child + 1 < length&&a[child + 1] > a[child])
+		{
+			child++;
+		}
+
+		// 如果父结点的值已经大于孩子结点的值，则直接结束
+		if (a[child] < temp)
+		{
+			break;
+		}
+
+		// 把孩子结点的值赋给父结点
+		a[father] = a[child];
+
+		// 选取孩子结点的左孩子结点,继续向下筛选
+		father = child;
+		child = 2 * father + 1;
+	}
+
+	a[father] = temp;
+}
+
+void heap2_sort(int *a, int length)
+{
+	int i;
+
+	//循环建立最大堆
+	for (i = length / 2; i >= 0; i--)
+	{
+		Adjust2MaxHeap(a, i, length - 1);
+	}
+		
+	//交换对顶和最后一个数之后，再调整堆
+	for (i = length - 1; i > 0; i--)
+	{
+		swap_values(a[0], a[i]);
+		Adjust2MaxHeap(a, 0, i);
 	}
 }
